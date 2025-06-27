@@ -17,6 +17,8 @@ rocketImg.src = 'assets/rocket.svg';
 // Audio
 const audio = new Audio('assets/sound/loop.mp3');
 const vinyl = document.getElementById('vinyl');
+const nowPlaying = document.getElementById('nowPlaying'); // <- élément ajouté
+
 let isPlaying = false;
 
 vinyl.addEventListener('click', () => {
@@ -27,14 +29,18 @@ vinyl.addEventListener('click', () => {
   if (!isPlaying) {
     audio.loop = true;
     audio.play();
-    vinyl.classList.add('vinyl-spin'); // démarrer la rotation
+    vinyl.classList.add('vinyl-spin'); // Démarrer la rotation
+    nowPlaying.classList.add('active'); // Afficher "Now Playing"
+
     if (!isAnimating) {
       startAnimation();
     }
   } else {
     audio.pause();
-    vinyl.classList.remove('vinyl-spin'); // stopper la rotation
+    vinyl.classList.remove('vinyl-spin'); // Arrêter la rotation
+    nowPlaying.classList.remove('active'); // Masquer "Now Playing"
   }
+
   isPlaying = !isPlaying;
 
   setTimeout(() => {
